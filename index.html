@@ -1,62 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test Site</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #0f0f0f;
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-
-        .card {
-            background: #1a1a1a;
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-            text-align: center;
-        }
-
-        h1 {
-            margin: 0;
-            margin-bottom: 15px;
-            font-size: 2.2rem;
-        }
-
-        p {
-            opacity: 0.8;
-            font-size: 1.1rem;
-        }
-
-        button {
-            margin-top: 18px;
-            padding: 10px 20px;
-            font-size: 1rem;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            background: #4c6ef5;
-            color: white;
-        }
-
-        button:hover {
-            background: #3d5ce0;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VORTINEX • Future Engine of Intelligence</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Montserrat', sans-serif; }
+    .glass { backdrop-filter: blur(20px); background: rgba(255,255,255,0.05); }
+    .section-title { letter-spacing: 3px; }
+  </style>
 </head>
-<body>
-    <div class="card">
-        <h1>Website Online ✅</h1>
-        <p>If you can see this, GitHub Pages is working.</p>
-        <button onclick="alert('Yo, it works!')">Test Button</button>
+<body class="bg-black text-white">
+  <!-- HERO -->
+  <section class="min-h-screen flex flex-col justify-center items-center text-center px-6 bg-[url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1950&q=80')] bg-cover bg-center relative">
+    <div class="absolute inset-0 bg-black/70"></div>
+    <div class="relative z-10 max-w-4xl">
+      <h1 class="text-6xl font-extrabold mb-4 tracking-widest">VORTINEX</h1>
+      <p class="text-xl opacity-90 max-w-2xl mx-auto">The Next-Gen Tech & AI Automation Company. Delivering Intelligence, Speed, and Precision for the Modern World.</p>
+      <div class="mt-8 flex justify-center gap-4">
+        <a href="#services" class="px-8 py-3 bg-white text-black font-bold rounded-xl hover:bg-gray-300 transition">Explore</a>
+        <a href="#contact" class="px-8 py-3 border border-white font-bold rounded-xl hover:bg-white hover:text-black transition">Contact</a>
+      </div>
     </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="py-24 px-6 bg-black">
+    <div class="max-w-5xl mx-auto text-center">
+      <h2 class="text-4xl font-bold mb-6 section-title">ABOUT VORTINEX</h2>
+      <p class="text-lg opacity-90">VORTINEX is a high‑intensity tech powerhouse delivering full‑stack automation, AI‑driven operations, cybersecurity, hardware support, cloud systems, and enterprise‑grade digital transformation. We build the tech that runs your future.</p>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="py-24 px-6 bg-gray-900">
+    <h2 class="text-4xl font-bold text-center mb-16 section-title">WHAT WE DO</h2>
+    <div class="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+      <div class="glass p-8 rounded-2xl border border-white/10">
+        <h3 class="text-2xl font-bold mb-3">AI Automation</h3>
+        <p class="opacity-80">Custom AI systems, workflow automation, intelligent agents, and full business automation suites.</p>
+      </div>
+      <div class="glass p-8 rounded-2xl border border-white/10">
+        <h3 class="text-2xl font-bold mb-3">Cybersecurity</h3>
+        <p class="opacity-80">Protection, audits, penetration testing, monitoring, and real‑time threat defense.</p>
+      </div>
+      <div class="glass p-8 rounded-2xl border border-white/10">
+        <h3 class="text-2xl font-bold mb-3">Tech Support</h3>
+        <p class="opacity-80">Hardware, software, systems diagnostics, setups, upgrades, and 24/7 technical support.</p>
+      </div>
+      <div class="glass p-8 rounded-2xl border border-white/10">
+        <h3 class="text-2xl font-bold mb-3">Cloud & DevOps</h3>
+        <p class="opacity-80">Cloud hosting, server management, CI/CD pipelines, and infrastructure scaling.</p>
+      </div>
+      <div class="glass p-8 rounded-2xl border border-white/10">
+        <h3 class="text-2xl font-bold mb-3">Software Engineering</h3>
+        <p class="opacity-80">Custom apps, internal tools, automation engines, dashboards, and enterprise software.</p>
+      </div>
+      <div class="glass p-8 rounded-2xl border border-white/10">
+        <h3 class="text-2xl font-bold mb-3">Business Consulting</h3>
+        <p class="opacity-80">Scaling strategies, digital transformation, automation mapping, and optimization services.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="py-20 px-6 bg-black">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-10 text-center">
+      <div>
+        <h3 class="text-5xl font-extrabold">99%</h3>
+        <p class="opacity-80">Client Satisfaction</p>
+      </div>
+      <div>
+        <h3 class="text-5xl font-extrabold">24/7</h3>
+        <p class="opacity-80">Tech Support</p>
+      </div>
+      <div>
+        <h3 class="text-5xl font-extrabold">+150</h3>
+        <p class="opacity-80">Systems Automated</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="py-24 px-6 bg-gray-900">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-4xl font-bold mb-6 section-title">CONTACT VORTINEX</h2>
+      <p class="opacity-80 mb-10">Want automation? Need tech support? Want a custom AI built for your business? Hit us up.</p>
+
+      <form class="grid gap-6 max-w-2xl mx-auto text-black">
+        <input class="p-4 rounded-xl" type="text" placeholder="Your Name" />
+        <input class="p-4 rounded-xl" type="email" placeholder="Your Email" />
+        <textarea class="p-4 rounded-xl" rows="4" placeholder="Your Message"></textarea>
+        <button class="px-8 py-4 bg-white rounded-xl font-bold hover:bg-gray-300 transition">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-10 text-center bg-black text-gray-500">
+    <p>© 2025 VORTINEX — All Rights Reserved.</p>
+  </footer>
 </body>
 </html>
