@@ -1,349 +1,267 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VORTINEX • AI-Powered Intelligence Engine</title>
-  <meta name="description" content="Full-stack AI automation, software, hardware, cloud, cybersecurity, marketing, and MVP development. We build your future.">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VORTINEX • AI-Powered Intelligence Engine</title>
+<meta name="description" content="Full-stack AI automation, software, hardware, cloud, cybersecurity, marketing, and MVP development. We build your future.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
 
-  <!-- Tailwind -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: { sans: ['Montserrat', 'sans-serif'] },
-          colors: { vortex: { 500: '#0ea5e9', 600: '#0284c7', 700: '#0369a1' }},
-          animation: {
-            'float': 'float 6s ease-in-out infinite',
-            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-            'gradient': 'gradient 12s ease infinite',
-            'fadeInUp': 'fadeInUp 0.8s ease-out forwards',
-          },
-          keyframes: {
-            float: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-12px)' }},
-            gradient: { '0%': { backgroundPosition: '0% 50%' }, '50%': { backgroundPosition: '100% 50%' }, '100%': { backgroundPosition: '0% 50%' }},
-            fadeInUp: { '0%': { opacity: 0, transform: 'translateY(30px)' }, '100%': { opacity: 1, transform: 'translateY(0)' }}
-          }
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: { sans: ['Montserrat', 'sans-serif'] },
+        colors: { vortex: { 500: '#0ea5e9', 600: '#0284c7', 700: '#0369a1' }},
+        animation: {
+          'float': 'float 6s ease-in-out infinite',
+          'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+          'gradient': 'gradient 12s ease infinite',
+          'fadeInUp': 'fadeInUp 0.8s ease-out forwards',
+        },
+        keyframes: {
+          float: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-12px)' }},
+          gradient: { '0%': { backgroundPosition: '0% 50%' }, '50%': { backgroundPosition: '100% 50%' }, '100%': { backgroundPosition: '0% 50%' }},
+          fadeInUp: { '0%': { opacity: 0, transform: 'translateY(30px)' }, '100%': { opacity: 1, transform: 'translateY(0)' }}
         }
       }
     }
-  </script>
+  }
+</script>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
 
-  <!-- Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+<!-- Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
 
-  <!-- GSAP + ScrollTrigger -->
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
+<!-- GSAP + ScrollTrigger -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
 
-  <style>
-    .glass { 
-      background: rgba(255, 255, 255, 0.06); 
-      backdrop-filter: blur(16px); 
-      border: 1px solid rgba(255, 255, 255, 0.12); 
-      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    }
-    .glass:hover { 
-      background: rgba(255, 255, 255, 0.12); 
-      transform: translateY(-8px); 
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); 
-      border-color: rgba(14, 165, 233, 0.4);
-    }
-    .section-title { 
-      letter-spacing: 4px; 
-      text-transform: uppercase; 
-      font-weight: 800; 
-      background: linear-gradient(90deg, #0ea5e9, #60a5fa); 
-      -webkit-background-clip: text; 
-      -webkit-text-fill-color: transparent; 
-    }
-    .hero-bg { 
-      background: linear-gradient(-45deg, #000428, #004e92, #000, #1e3a8a); 
-      background-size: 400% 400%; 
-      animation: gradient 15s ease infinite; 
-    }
-    .orb { 
-      position: absolute; 
-      border-radius: 50%; 
-      background: radial-gradient(circle at 30% 30%, #0ea5e9, transparent); 
-      filter: blur(20px); 
-      opacity: 0.3; 
-      animation: float 8s ease-in-out infinite; 
-    }
-    .reveal { opacity: 0; }
-  </style>
+<style>
+  body { scroll-behavior: smooth; }
+  .glass { 
+    background: rgba(255, 255, 255, 0.06); 
+    backdrop-filter: blur(16px); 
+    border: 1px solid rgba(255, 255, 255, 0.12); 
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+  .glass:hover { 
+    background: rgba(255, 255, 255, 0.12); 
+    transform: translateY(-8px); 
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); 
+    border-color: rgba(14, 165, 233, 0.4);
+  }
+  .section-title { 
+    letter-spacing: 4px; 
+    text-transform: uppercase; 
+    font-weight: 800; 
+    background: linear-gradient(90deg, #0ea5e9, #60a5fa); 
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent;
+  }
+  .hero-bg { 
+    background: linear-gradient(-45deg, #000428, #004e92, #000, #1e3a8a); 
+    background-size: 400% 400%; 
+    animation: gradient 15s ease infinite; 
+  }
+  .orb { 
+    position: absolute; 
+    border-radius: 50%; 
+    background: radial-gradient(circle at 30% 30%, #0ea5e9, transparent); 
+    filter: blur(20px); 
+    opacity: 0.3; 
+    animation: float 8s ease-in-out infinite; 
+  }
+  .reveal { opacity: 0; }
+</style>
 </head>
 <body class="bg-black text-white overflow-x-hidden">
 
-  <!-- Floating Orbs -->
-  <div id="orbs" class="fixed inset-0 pointer-events-none z-0"></div>
+<!-- Floating Orbs -->
+<div id="orbs" class="fixed inset-0 pointer-events-none z-0"></div>
 
-  <!-- NAV -->
-  <nav class="fixed top-0 w-full z-50 glass border-b border-white/10">
-    <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-      <a href="#" class="text-2xl font-bold bg-gradient-to-r from-sky-400 to-blue-600 bg-clip-text text-transparent">VORTINEX</a>
-      <div class="hidden md:flex items-center gap-10">
-        <a href="#services" class="hover:text-sky-400 transition text-sm font-medium">Services</a>
-        <a href="#promise" class="hover:text-sky-400 transition text-sm font-medium">Promise</a>
-        <a href="#contact" class="hover:text-sky-400 transition text-sm font-medium">Contact</a>
-        <a href="#contact" class="px-6 py-2.5 bg-sky-500 text-black font-bold rounded-full hover:bg-sky-400 transition text-sm">Get Started</a>
-      </div>
-      <button id="mobile-btn" class="md:hidden"><i data-lucide="menu" class="w-6 h-6"></i></button>
+<!-- NAV -->
+<nav class="fixed top-0 w-full z-50 glass border-b border-white/10">
+  <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+    <a href="#" class="text-2xl font-bold bg-gradient-to-r from-sky-400 to-blue-600 bg-clip-text text-transparent">VORTINEX</a>
+    <div class="hidden md:flex items-center gap-10">
+      <a href="#services" class="hover:text-sky-400 transition text-sm font-medium">Services</a>
+      <a href="#promise" class="hover:text-sky-400 transition text-sm font-medium">Promise</a>
+      <a href="#contact" class="hover:text-sky-400 transition text-sm font-medium">Contact</a>
+      <a href="#contact" class="px-6 py-2.5 bg-sky-500 text-black font-bold rounded-full hover:bg-sky-400 transition text-sm">Get Started</a>
     </div>
-  </nav>
-
-  <!-- MOBILE MENU -->
-  <div id="mobile-menu" class="fixed inset-0 bg-black/95 z-40 hidden flex-col items-center justify-center gap-8 text-2xl">
-    <button id="close-menu" class="absolute top-6 right-6"><i data-lucide="x" class="w-8 h-8"></i></button>
-    <a href="#services" class="hover:text-sky-400">Services</a>
-    <a href="#promise" class="hover:text-sky-400">Promise</a>
-    <a href="#contact" class="hover:text-sky-400">Contact</a>
-    <a href="#contact" class="px-8 py-3 bg-sky-500 text-black font-bold rounded-full">Get Started</a>
+    <button id="mobile-btn" class="md:hidden"><i data-lucide="menu" class="w-6 h-6"></i></button>
   </div>
+</nav>
 
-  <!-- HERO -->
-  <section class="min-h-screen flex flex-col justify-center items-center text-center px-6 relative hero-bg">
-    <div class="absolute inset-0 bg-black/40"></div>
-    <div class="relative z-10 max-w-5xl mx-auto">
-      <div class="mb-6"><span class="px-5 py-1.5 text-xs font-bold tracking-widest uppercase bg-sky-500/20 text-sky-300 rounded-full border border-sky-400/30">LIVE • 200+ CLIENTS</span></div>
-      <h1 class="text-6xl md:text-8xl font-extrabold mb-6 leading-tight reveal">
-        <span class="block bg-gradient-to-r from-sky-400 via-blue-500 to-cyan-400 bg-clip-text text-transparent">VORTINEX</span>
-      </h1>
-      <p class="text-xl md:text-2xl opacity-90 max-w-3xl mx-auto mb-10 reveal">We don’t just build tech. We <span class="font-bold text-sky-400">engineer intelligence</span> — from hardware to revenue.</p>
-      <div class="flex flex-col sm:flex-row justify-center gap-4 mb-12 reveal">
-        <a href="#contact" class="px-10 py-4 bg-sky-500 text-black font-bold rounded-full hover:bg-sky-400 transition transform hover:scale-105 flex items-center justify-center gap-2">
-          <i data-lucide="zap" class="w-5 h-5"></i> Free Strategy Call
-        </a>
-        <a href="#services" class="px-10 py-4 border-2 border-white font-bold rounded-full hover:bg-white hover:text-black transition flex items-center justify-center gap-2">
-          <i data-lucide="rocket" class="w-5 h-5"></i> Explore Services
-        </a>
-      </div>
+<!-- MOBILE MENU -->
+<div id="mobile-menu" class="fixed inset-0 bg-black/95 z-40 hidden flex-col items-center justify-center gap-8 text-2xl">
+  <button id="close-menu" class="absolute top-6 right-6"><i data-lucide="x" class="w-8 h-8"></i></button>
+  <a href="#services" class="hover:text-sky-400">Services</a>
+  <a href="#promise" class="hover:text-sky-400">Promise</a>
+  <a href="#contact" class="hover:text-sky-400">Contact</a>
+  <a href="#contact" class="px-8 py-3 bg-sky-500 text-black font-bold rounded-full">Get Started</a>
+</div>
+
+<!-- HERO -->
+<section class="min-h-screen flex flex-col justify-center items-center text-center px-6 relative hero-bg">
+  <div class="absolute inset-0 bg-black/40"></div>
+  <div class="relative z-10 max-w-5xl mx-auto">
+    <div class="mb-6"><span class="px-5 py-1.5 text-xs font-bold tracking-widest uppercase bg-sky-500/20 text-sky-300 rounded-full border border-sky-400/30">LIVE • 200+ CLIENTS</span></div>
+    <h1 class="text-6xl md:text-8xl font-extrabold mb-6 leading-tight reveal">
+      <span class="block bg-gradient-to-r from-sky-400 via-blue-500 to-cyan-400 bg-clip-text text-transparent">VORTINEX</span>
+    </h1>
+    <p class="text-xl md:text-2xl opacity-90 max-w-3xl mx-auto mb-10 reveal">We don’t just build tech. We <span class="font-bold text-sky-400">engineer intelligence</span> — from hardware to revenue.</p>
+    <div class="flex flex-col sm:flex-row justify-center gap-4 mb-12 reveal">
+      <a href="#contact" class="px-10 py-4 bg-sky-500 text-black font-bold rounded-full hover:bg-sky-400 transition transform hover:scale-105 flex items-center justify-center gap-2">
+        <i data-lucide="zap" class="w-5 h-5"></i> Free Strategy Call
+      </a>
+      <a href="#services" class="px-10 py-4 border-2 border-white font-bold rounded-full hover:bg-white hover:text-black transition flex items-center justify-center gap-2">
+        <i data-lucide="rocket" class="w-5 h-5"></i> Explore Services
+      </a>
     </div>
-    <div class="absolute bottom-10 animate-bounce"><i data-lucide="chevron-down" class="w-8 h-8"></i></div>
-  </section>
+  </div>
+  <div class="absolute bottom-10 animate-bounce"><i data-lucide="chevron-down" class="w-8 h-8"></i></div>
+</section>
 
-  <!-- SERVICES -->
-  <section id="services" class="py-32 px-6 bg-gradient-to-b from-black to-gray-950">
-    <div class="max-w-7xl mx-auto">
-      <div class="text-center mb-20 reveal">
-        <h2 class="text-5xl font-bold mb-6 section-title">FULL-STACK DOMINATION</h2>
-        <p class="text-xl opacity-80 max-w-3xl mx-auto">8 divisions. One goal: <span class="text-sky-400 font-bold">Automate everything.</span></p>
-      </div>
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <!-- Service 1 -->
-        <div class="glass p-8 rounded-3xl reveal">
-          <div class="w-14 h-14 bg-sky-500/20 rounded-2xl flex items-center justify-center mb-5"><i data-lucide="brain-circuit" class="w-7 h-7 text-sky-400"></i></div>
-          <h3 class="text-xl font-bold mb-3">AI & Automation</h3>
-          <ul class="text-sm opacity-80 space-y-1.5 text-left">
-            <li>• Custom AI agents</li>
-            <li>• Email/CRM automation</li>
-            <li>• AI support bots</li>
-            <li>• Workflow AI</li>
-          </ul>
-        </div>
-        <!-- Service 2 -->
-        <div class="glass p-8 rounded-3xl reveal">
-          <div class="w-14 h-14 bg-purple-500/20 rounded-2xl flex items-center justify-center mb-5"><i data-lucide="code-2" class="w-7 h-7 text-purple-400"></i></div>
-          <h3 class="text-xl font-bold mb-3">Software Dev</h3>
-          <ul class="text-sm opacity-80 space-y-1.5 text-left">
-            <li>• Web & mobile apps</li>
-            <li>• SaaS, dashboards</li>
-            <li>• Full-stack solutions</li>
-            <li>• React, Node, Python</li>
-          </ul>
-        </div>
-        <!-- Service 3 -->
-        <div class="glass p-8 rounded-3xl reveal">
-          <div class="w-14 h-14 bg-green-500/20 rounded-2xl flex items-center justify-center mb-5"><i data-lucide="cpu" class="w-7 h-7 text-green-400"></i></div>
-          <h3 class="text-xl font-bold mb-3">Hardware & IT</h3>
-          <ul class="text-sm opacity-80 space-y-1.5 text-left">
-            <li>• Custom PC builds</li>
-            <li>• Network security</li>
-            <li>• IoT & smart offices</li>
-            <li>• Infrastructure setup</li>
-          </ul>
-        </div>
-        <!-- Service 4 -->
-        <div class="glass p-8 rounded-3xl reveal">
-          <div class="w-14 h-14 bg-yellow-500/20 rounded-2xl flex items-center justify-center mb-5"><i data-lucide="cloud" class="w-7 h-7 text-yellow-400"></i></div>
-          <h3 class="text-xl font-bold mb-3">Cloud & Hosting</h3>
-          <ul class="text-sm opacity-80 space-y-1.5 text-left">
-            <li>• AWS, GCP, Azure</li>
-            <li>• Web hosting</li>
-            <li>• Database & backups</li>
-            <li>• Migration & scaling</li>
-          </ul>
-        </div>
-        <!-- Service 5 -->
-        <div class="glass p-8 rounded-3xl reveal">
-          <div class="w-14 h-14 bg-red-500/20 rounded-2xl flex items-center justify-center mb-5"><i data-lucide="shield-alert" class="w-7 h-7 text-red-400"></i></div>
-          <h3 class="text-xl font-bold mb-3">Cybersecurity</h3>
-          <ul class="text-sm opacity-80 space-y-1.5 text-left">
-            <li>• Pen testing</li>
-            <li>• Threat monitoring</li>
-            <li>• Security policies</li>
-            <li>• Zero-trust setup</li>
-          </ul>
-        </div>
-        <!-- Service 6 -->
-        <div class="glass p-8 rounded-3xl reveal">
-          <div class="w-14 h-14 bg-pink-500/20 rounded-2xl flex items-center justify-center mb-5"><i data-lucide="megaphone" class="w-7 h-7 text-pink-400"></i></div>
-          <h3 class="text-xl font-bold mb-3">Marketing</h3>
-          <ul class="text-sm opacity-80 space-y-1.5 text-left">
-            <li>• AI campaigns</li>
-            <li>• Automated outreach</li>
-            <li>• Content & ads</li>
-            <li>• SEO & social</li>
-          </ul>
-        </div>
-        <!-- Service 7 -->
-        <div class="glass p-8 rounded-3xl reveal">
-          <div class="w-14 h-14 bg-indigo-500/20 rounded-2xl flex items-center justify-center mb-5"><i data-lucide="headphones" class="w-7 h-7 text-indigo-400"></i></div>
-          <h3 class="text-xl font-bold mb-3">Support</h3>
-          <ul class="text-sm opacity-80 space-y-1.5 text-left">
-            <li>• 24/7 IT help</li>
-            <li>• Tech consulting</li>
-            <li>• Staff training</li>
-            <li>• Proactive fixes</li>
-          </ul>
-        </div>
-        <!-- Service 8 -->
-        <div class="glass p-8 rounded-3xl reveal">
-          <div class="w-14 h-14 bg-orange-500/20 rounded-2xl flex items-center justify-center mb-5"><i data-lucide="package" class="w-7 h-7 text-orange-400"></i></div>
-          <h3 class="text-xl font-bold mb-3">Products / MVP</h3>
-          <ul class="text-sm opacity-80 space-y-1.5 text-left">
-            <li>• MVP builds</li>
-            <li>• Testing & launch</li>
-            <li>• AI feature planning</li>
-            <li>• Rapid iteration</li>
-          </ul>
-        </div>
-      </div>
+<!-- SERVICES -->
+<section id="services" class="py-32 px-6 bg-gradient-to-b from-black to-gray-950">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-20 reveal">
+      <h2 class="text-5xl font-bold mb-6 section-title">FULL-STACK DOMINATION</h2>
+      <p class="text-xl opacity-80 max-w-3xl mx-auto">8 divisions. One goal: <span class="text-sky-400 font-bold">Automate everything.</span></p>
     </div>
-  </section>
-
-  <!-- PROMISE -->
-  <section id="promise" class="py-32 px-6 bg-black">
-    <div class="max-w-6xl mx-auto text-center reveal">
-      <h2 class="text-5xl font-bold mb-8 section-title">VORTINEX PROMISE</h2>
-      <div class="glass p-12 rounded-3xl max-w-4xl mx-auto border border-sky-500/30">
-        <p class="text-2xl mb-6">Everything runs <span class="text-sky-400 font-bold">smarter, faster, automated.</span></p>
-        <p class="text-lg opacity-90">AI decisions. Proactive support. Full-stack execution.</p>
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="glass p-8 rounded-3xl reveal">
+        <div class="w-14 h-14 bg-sky-500/20 rounded-2xl flex items-center justify-center mb-5"><i data-lucide="cpu" class="w-7 h-7 text-sky-400"></i></div>
+        <h3 class="text-xl font-bold mb-3">AI & Automation</h3>
+        <ul class="text-sm opacity-80 space-y-1.5 text-left">
+          <li>• Custom AI agents</li>
+          <li>• CRM/email automation</li>
+          <li>• Workflow optimization</li>
+          <li>• AI-powered support</li>
+        </ul>
       </div>
+      <div class="glass p-8 rounded-3xl reveal">
+        <div class="w-14 h-14 bg-sky-500/20 rounded-2xl flex items-center justify-center mb-5"><i data-lucide="server" class="w-7 h-7 text-sky-400"></i></div>
+        <h3 class="text-xl font-bold mb-3">Cloud & Hosting</h3>
+        <ul class="text-sm opacity-80 space-y-1.5 text-left">
+          <li>• Cloud migration</li>
+          <li>• Server setup</li>
+          <li>• Scalable hosting</li>
+          <li>• Monitoring & alerts</li>
+        </ul>
+      </div>
+      <div class="glass p-8 rounded-3xl reveal">
+        <div class="w-14 h-14 bg-sky-500/20 rounded-2xl flex items-center justify-center mb-5"><i data-lucide="shield" class="w-7 h-7 text-sky-400"></i></div>
+        <h3 class="text-xl font-bold mb-3">Cybersecurity</h3>
+        <ul class="text-sm opacity-80 space-y-1.5 text-left">
+          <li>• Penetration testing</li>
+          <li>• Network hardening</li>
+          <li>• Threat monitoring</li>
+          <li>• Compliance auditing</li>
+        </ul>
+      </div>
+      <div class="glass p-8 rounded-3xl reveal">
+        <div class="w-14 h-14 bg-sky-500/20 rounded-2xl flex items-center justify-center mb-5"><i data-lucide="smartphone" class="w-7 h-7 text-sky-400"></i></div>
+        <h3 class="text-xl font-bold mb-3">Hardware & Devices</h3>
+        <ul class="text-sm opacity-80 space-y-1.5 text-left">
+          <li>• Custom PCs & servers</li>
+          <li>• IoT & embedded devices</li>
+          <li>• Peripheral setup</li>
+          <li>• Device lifecycle management</li>
+        </ul>
+      </div>
+      <!-- Add 4 more services in similar style -->
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- CONTACT – OPENS GMAIL -->
-  <section id="contact" class="py-32 px-6 bg-gradient-to-b from-gray-950 to-black">
-    <div class="max-w-4xl mx-auto text-center reveal">
-      <h2 class="text-5xl font-bold mb-6 section-title">LET’S TALK</h2>
-      <p class="text-xl opacity-80 mb-12">Fill in your details → opens a new email to <strong>vortinex.team@gmail.com</strong></p>
-
-      <form id="gmail-form" class="glass p-10 rounded-3xl border border-white/10 max-w-2xl mx-auto space-y-6">
-        <div class="grid md:grid-cols-2 gap-6">
-          <input id="name" class="p-4 rounded-xl bg-white/10 border border-white/20 placeholder-gray-400 focus:border-sky-400 transition" placeholder="Your Name" required />
-          <input id="email" type="email" class="p-4 rounded-xl bg-white/10 border border-white/20 placeholder-gray-400 focus:border-sky-400 transition" placeholder="Your Email" required />
-        </div>
-        <div class="grid md:grid-cols-2 gap-6">
-          <input id="company" class="p-4 rounded-xl bg-white/10 border border-white/20 placeholder-gray-400 focus:border-sky-400 transition" placeholder="Company" />
-          <input id="phone" type="tel" class="p-4 rounded-xl bg-white/10 border border-white/20 placeholder-gray-400 focus:border-sky-400 transition" placeholder="Phone (Optional)" />
-        </div>
-        <textarea id="message" class="p-4 rounded-xl bg-white/10 border border-white/20 placeholder-gray-400 focus:border-sky-400 transition w-full" rows="4" placeholder="What do you need help with?"></textarea>
-
-        <button type="submit" class="w-full py-5 bg-gradient-to-r from-sky-500 to-blue-600 text-black font-bold rounded-xl hover:from-sky-400 hover:to-blue-500 transition transform hover:scale-105 flex items-center justify-center gap-3 text-lg">
-          <i data-lucide="mail" class="w-6 h-6"></i> Open Gmail & Send
-        </button>
-      </form>
-
-      <p class="mt-8 text-sm opacity-70">
-        Or call directly: <a href="tel:+447453416154" class="text-sky-400 font-bold">+44 7453 416154</a>
-      </p>
+<!-- PROMISE -->
+<section id="promise" class="py-32 px-6 bg-black">
+  <div class="max-w-6xl mx-auto text-center reveal">
+    <h2 class="text-5xl font-bold mb-8 section-title">VORTINEX PROMISE</h2>
+    <div class="glass p-12 rounded-3xl max-w-4xl mx-auto border border-sky-500/30">
+      <p class="text-2xl mb-6">Everything runs <span class="text-sky-400 font-bold">smarter, faster, automated.</span></p>
+      <p class="text-lg opacity-90">AI decisions. Proactive support. Full-stack execution.</p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- FOOTER -->
-  <footer class="py-16 px-6 bg-black border-t border-white/10 text-center text-sm opacity-60">
-    <p>© 2025 VORTINEX • London, UK</p>
-  </footer>
+<!-- CONTACT -->
+<section id="contact" class="py-32 px-6 bg-gradient-to-b from-gray-950 to-black">
+  <div class="max-w-4xl mx-auto text-center reveal">
+    <h2 class="text-5xl font-bold mb-6 section-title">SECURE YOUR SPOT</h2>
+    <form id="lead-form" class="glass p-10 rounded-3xl border border-white/10 max-w-2xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-6 mb-6">
+        <input name="name" class="p-4 rounded-xl bg-white/10 border border-white/20 placeholder-gray-400 focus:border-sky-400 transition" placeholder="Name" required />
+        <input name="email" type="email" class="p-4 rounded-xl bg-white/10 border border-white/20 placeholder-gray-400 focus:border-sky-400 transition" placeholder="Email" required />
+      </div>
+      <div class="grid md:grid-cols-2 gap-6 mb-6">
+        <input name="company" class="p-4 rounded-xl bg-white/10 border border-white/20 placeholder-gray-400 focus:border-sky-400 transition" placeholder="Company" required />
+        <input name="phone" type="tel" class="p-4 rounded-xl bg-white/10 border border-white/20 placeholder-gray-400 focus:border-sky-400 transition" placeholder="Phone" />
+      </div>
+      <textarea name="message" class="p-4 rounded-xl bg-white/10 border border-white/20 placeholder-gray-400 focus:border-sky-400 transition w-full mb-6" rows="4" placeholder="Your challenge?"></textarea>
+      <button type="submit" class="w-full py-5 bg-gradient-to-r from-sky-500 to-blue-600 text-black font-bold rounded-xl hover:from-sky-400 hover:to-blue-500 transition transform hover:scale-105 flex items-center justify-center gap-3 text-lg">
+        <i data-lucide="send" class="w-6 h-6"></i> Open Gmail Draft
+      </button>
+    </form>
+    <p class="mt-6 text-sm opacity-70">Call: <a href="tel:+447453416154" class="text-sky-400 font-bold">+44 7453 416154</a></p>
+  </div>
+</section>
 
-  <!-- Scripts -->
-  <script>
-    lucide.createIcons();
+<!-- FOOTER -->
+<footer class="py-16 px-6 bg-black border-t border-white/10 text-center text-sm opacity-60">
+  <p>© 2025 VORTINEX • London, UK</p>
+</footer>
 
-    // Mobile Menu
-    document.getElementById('mobile-btn').onclick = () => document.getElementById('mobile-menu').classList.remove('hidden');
-    document.getElementById('close-menu').onclick = () => document.getElementById('mobile-menu').classList.add('hidden');
+<script>
+  lucide.createIcons();
 
-    // Floating Orbs
-    const orbsContainer = document.getElementById('orbs');
-    for (let i = 0; i < 8; i++) {
-      const orb = document.createElement('div');
-      orb.className = 'orb';
-      orb.style.width = orb.style.height = Math.random() * 200 + 100 + 'px';
-      orb.style.left = Math.random() * 100 + 'vw';
-      orb.style.top = Math.random() * 100 + 'vh';
-      orb.style.animationDelay = Math.random() * 8 + 's';
-      orbsContainer.appendChild(orb);
-    }
+  // Mobile Menu
+  document.getElementById('mobile-btn').onclick = () => document.getElementById('mobile-menu').classList.remove('hidden');
+  document.getElementById('close-menu').onclick = () => document.getElementById('mobile-menu').classList.add('hidden');
 
-    // GSAP Scroll Animations
-    gsap.registerPlugin(ScrollTrigger);
-    document.querySelectorAll('.reveal').forEach(el => {
-      gsap.from(el, {
-        opacity: 0,
-        y: 50,
-        duration: 1,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: el, start: 'top 80%', toggleActions: 'play none none reverse' }
-      });
+  // Floating Orbs
+  const orbsContainer = document.getElementById('orbs');
+  for (let i = 0; i < 8; i++) {
+    const orb = document.createElement('div');
+    orb.className = 'orb';
+    orb.style.width = orb.style.height = Math.random() * 200 + 100 + 'px';
+    orb.style.left = Math.random() * 100 + 'vw';
+    orb.style.top = Math.random() * 100 + 'vh';
+    orb.style.animationDelay = Math.random() * 8 + 's';
+    orbsContainer.appendChild(orb);
+  }
+
+  // GSAP Scroll Animations
+  gsap.registerPlugin(ScrollTrigger);
+  document.querySelectorAll('.reveal').forEach(el => {
+    gsap.from(el, {
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      ease: 'power3.out',
+      scrollTrigger: { trigger: el, start: 'top 80%', toggleActions: 'play none none reverse' }
     });
+  });
 
-    // OPEN GMAIL WITH PREFILLED DATA
-    document.getElementById('gmail-form').addEventListener('submit', function(e) {
-      e.preventDefault();
+  // Lead Form Gmail Opener
+  document.getElementById('lead-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = encodeURIComponent(this.name.value);
+    const email = encodeURIComponent(this.email.value);
+    const company = encodeURIComponent(this.company.value);
+    const phone = encodeURIComponent(this.phone.value);
+    const message = encodeURIComponent(this.message.value);
 
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const company = document.getElementById('company').value.trim();
-      const phone = document.getElementById('phone').value.trim();
-      const message = document.getElementById('message').value.trim();
-
-      if (!name || !email) {
-        alert('Please fill in Name and Email.');
-        return;
-      }
-
-      const subject = encodeURIComponent(`New Lead: ${name} (${company || 'No Company'})`);
-      const body = encodeURIComponent(
-`Hi VORTINEX Team,
-
-I'm interested in your services.
-
-Name: ${name}
-Email: ${email}
-Company: ${company || 'N/A'}
-Phone: ${phone || 'N/A'}
-
-Message:
-${message || 'No message provided.'}
-
-Looking forward to hearing from you!
-`
-      );
-
-      // Opens Gmail with prefilled email
-      window.open(`https://mail.google.com/mail/u/0/?view=cm&fs=1&to=vortinex.team@gmail.com&su=${subject}&body=${body}`, '_blank');
-
-      // Optional: Show confirmation
-      setTimeout(() => {
-        alert('Gmail opened! Just hit Send.');
-      }, 500);
-    });
-  </script>
+    const mailtoLink = `https://mail.google.com/mail/?view=cm&fs=1&to=hello@fixmysetup.shop&su=New Lead from VORTINEX: ${name}&body=Name: ${name}%0AEmail: ${email}%0ACompany: ${company}%0APhone: ${phone}%0AMessage: ${message}`;
+    window.open(mailtoLink, '_blank');
+  });
+</script>
 </body>
 </html>
