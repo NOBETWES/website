@@ -4,105 +4,528 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>VORTINEX • Future Engine of Intelligence</title>
+  <meta name="description" content="VORTINEX is a next-gen AI & tech automation company delivering intelligent systems, cybersecurity, cloud infrastructure, and enterprise-grade digital transformation.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+  
+  <!-- Tailwind CDN + Config -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Montserrat', 'sans-serif'],
+          },
+          colors: {
+            vortex: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+              900: '#0c4a6e',
+            }
+          },
+          animation: {
+            'float': 'float 6s ease-in-out infinite',
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'glow': 'glow 2s ease-in-out infinite alternate',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-20px)' },
+            },
+            glow: {
+              '0%': { boxShadow: '0 0 20px rgba(14, 165, 233, 0.5)' },
+              '100%': { boxShadow: '0 0 40px rgba(14, 165, 233, 0.8)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
   <style>
-    body { font-family: 'Montserrat', sans-serif; }
-    .glass { backdrop-filter: blur(20px); background: rgba(255,255,255,0.05); }
-    .section-title { letter-spacing: 3px; }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #000; }
+    ::-webkit-scrollbar-thumb { background: #0ea5e9; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #0284c7; }
+
+    .glass { 
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+    .glass:hover { 
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+    .section-title { 
+      letter-spacing: 4px; 
+      text-transform: uppercase;
+      font-weight: 700;
+      background: linear-gradient(90deg, #0ea5e9, #60a5fa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-bg {
+      background: linear-gradient(-45deg, #000428, #004e92, #000000, #1e3a8a);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+    }
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #0ea5e9;
+      border-radius: 50%;
+      animation: floatParticle 15s infinite linear;
+      opacity: 0.7;
+    }
+    @keyframes floatParticle {
+      0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+      10% { opacity: 0.7; }
+      90% { opacity: 0.7; }
+      100% { transform: translateY(-100px) translateX(100px); opacity: 0; }
+    }
   </style>
 </head>
-<body class="bg-black text-white">
-  <!-- HERO -->
-  <section class="min-h-screen flex flex-col justify-center items-center text-center px-6 bg-[url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1950&q=80')] bg-cover bg-center relative">
-    <div class="absolute inset-0 bg-black/70"></div>
-    <div class="relative z-10 max-w-4xl">
-      <h1 class="text-6xl font-extrabold mb-4 tracking-widest">VORTINEX</h1>
-      <p class="text-xl opacity-90 max-w-2xl mx-auto">The Next-Gen Tech & AI Automation Company. Delivering Intelligence, Speed, and Precision for the Modern World.</p>
-      <div class="mt-8 flex justify-center gap-4">
-        <a href="#services" class="px-8 py-3 bg-white text-black font-bold rounded-xl hover:bg-gray-300 transition">Explore</a>
-        <a href="#contact" class="px-8 py-3 border border-white font-bold rounded-xl hover:bg-white hover:text-black transition">Contact</a>
+<body class="bg-black text-white overflow-x-hidden">
+
+  <!-- Floating Particles Background -->
+  <div id="particles" class="fixed inset-0 pointer-events-none z-0"></div>
+
+  <!-- NAV -->
+  <nav class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="#" class="text-2xl font-bold bg-gradient-to-r from-sky-400 to-blue-600 bg-clip-text text-transparent">VORTINEX</a>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#services" class="hover:text-sky-400 transition">Services</a>
+        <a href="#about" class="hover:text-sky-400 transition">About</a>
+        <a href="#stats" class="hover:text-sky-400 transition">Impact</a>
+        <a href="#contact" class="hover:text-sky-400 transition">Contact</a>
+        <a href="#contact" class="ml-4 px-5 py-2 bg-sky-500 text-black font-bold rounded-full hover:bg-sky-400 transition glow">Get Started</a>
       </div>
+      <button class="md:hidden" id="mobile-menu-btn">
+        <i data-lucide="menu" class="w-6 h-6"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div id="mobile-menu" class="fixed inset-0 bg-black/95 z-40 hidden flex-col items-center justify-center gap-8 text-2xl">
+    <button class="absolute top-6 right-6" id="close-menu">
+      <i data-lucide="x" class="w-8 h-8"></i>
+    </button>
+    <a href="#services" class="hover:text-sky-400 transition">Services</a>
+    <a href="#about" class="hover:text-sky-400 transition">About</a>
+    <a href="#stats" class="hover:text-sky-400 transition">Impact</a>
+    <a href="#contact" class="hover:text-sky-400 transition">Contact</a>
+    <a href="#contact" class="px-8 py-3 bg-sky-500 text-black font-bold rounded-full hover:bg-sky-400 transition">Get Started</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="min-h-screen flex flex-col justify-center items-center text-center px-6 relative hero-bg">
+    <div class="absolute inset-0 bg-black/40"></div>
+    <div class="relative z-10 max-w-5xl mx-auto">
+      <div class="mb-6 inline-block">
+        <span class="px-4 py-1 text-xs font-bold tracking-widest uppercase bg-sky-500/20 text-sky-300 rounded-full border border-sky-400/30">LAUNCHING THE FUTURE</span>
+      </div>
+      <h1 class="text-6xl md:text-8xl font-extrabold mb-6 leading-tight">
+        <span class="block bg-gradient-to-r from-sky-400 via-blue-500 to-cyan-400 bg-clip-text text-transparent animate-pulse-slow">VORTINEX</span>
+      </h1>
+      <p class="text-xl md:text-2xl opacity-90 max-w-3xl mx-auto mb-10 leading-relaxed">
+        The <span class="font-bold text-sky-400">Next-Gen AI & Automation Powerhouse</span>. We engineer intelligence, scale operations, and secure the future of enterprise.
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4 mb-12">
+        <a href="#contact" class="px-10 py-4 bg-sky-500 text-black font-bold rounded-full hover:bg-sky-400 transition transform hover:scale-105 glow flex items-center justify-center gap-2">
+          <i data-lucide="zap" class="w-5 h-5"></i>
+          Start Your Transformation
+        </a>
+        <a href="#services" class="px-10 py-4 border-2 border-white font-bold rounded-full hover:bg-white hover:text-black transition flex items-center justify-center gap-2">
+          <i data-lucide="rocket" class="w-5 h-5"></i>
+          Explore Solutions
+        </a>
+      </div>
+      <div class="flex items-center justify-center gap-8 text-sm opacity-70">
+        <div class="flex items-center gap-2">
+          <i data-lucide="shield" class="w-5 h-5 text-green-400"></i>
+          <span>Enterprise Grade</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <i data-lucide="clock" class="w-5 h-5 text-yellow-400"></i>
+          <span>24/7 Support</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <i data-lucide="award" class="w-5 h-5 text-purple-400"></i>
+          <span>99% Uptime</span>
+        </div>
+      </div>
+    </div>
+    <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+      <i data-lucide="chevron-down" class="w-8 h-8"></i>
     </div>
   </section>
 
   <!-- ABOUT -->
-  <section class="py-24 px-6 bg-black">
-    <div class="max-w-5xl mx-auto text-center">
-      <h2 class="text-4xl font-bold mb-6 section-title">ABOUT VORTINEX</h2>
-      <p class="text-lg opacity-90">VORTINEX is a high‑intensity tech powerhouse delivering full‑stack automation, AI‑driven operations, cybersecurity, hardware support, cloud systems, and enterprise‑grade digital transformation. We build the tech that runs your future.</p>
+  <section id="about" class="py-32 px-6 bg-gradient-to-b from-black to-gray-950">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-5xl font-bold mb-6 section-title">ENGINEERED FOR THE FUTURE</h2>
+        <p class="text-xl opacity-80 max-w-3xl mx-auto">We don’t just build technology — we architect intelligence. From AI agents that think to systems that never sleep.</p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h3 class="text-3xl font-bold mb-6">The VORTINEX Mission</h3>
+          <p class="text-lg opacity-80 mb-6 leading-relaxed">
+            We fuse <span class="text-sky-400 font-bold">artificial intelligence</span>, <span class="text-sky-400 font-bold">automation engineering</span>, and <span class="text-sky-400 font-bold">zero-trust security</span> into a single unstoppable force. Our clients don’t adapt to the future — they define it.
+          </p>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <i data-lucide="check-circle" class="w-6 h-6 text-green-400 mt-1 flex-shrink-0"></i>
+              <span>150+ enterprise systems fully automated</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <i data-lucide="check-circle" class="w-6 h-6 text-green-400 mt-1 flex-shrink-0"></i>
+              <span>Zero major security incidents in 5 years</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <i data-lucide="check-circle" class="w-6 h-6 text-green-400 mt-1 flex-shrink-0"></i>
+              <span>Average 68% cost reduction via AI automation</span>
+            </li>
+          </ul>
+        </div>
+        <div class="relative">
+          <div class="glass p-8 rounded-3xl border border-sky-500/30 glow">
+            <div class="space-y-6">
+              <div>
+                <div class="flex justify-between items-center mb-2">
+                  <span class="font-bold">AI Integration</span>
+                  <span class="text-sky-400">98%</span>
+                </div>
+                <div class="h-3 bg-gray-800 rounded-full overflow-hidden">
+                  <div class="h-full bg-gradient-to-r from-sky-500 to-blue-500 rounded-full" style="width: 98%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between items-center mb-2">
+                  <span class="font-bold">Automation Coverage</span>
+                  <span class="text-sky-400">95%</span>
+                </div>
+                <div class="h-3 bg-gray-800 rounded-full overflow-hidden">
+                  <div class="h-full bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full" style="width: 95%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between items-center mb-2">
+                  <span class="font-bold">Security Posture</span>
+                  <span class="text-green-400">100%</span>
+                </div>
+                <div class="h-3 bg-gray-800 rounded-full overflow-hidden">
+                  <div class="h-full bg-gradient-to-r from-green-500 to-emerald-500 rounded-full" style="width: 100%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- SERVICES -->
-  <section id="services" class="py-24 px-6 bg-gray-900">
-    <h2 class="text-4xl font-bold text-center mb-16 section-title">WHAT WE DO</h2>
-    <div class="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
-      <div class="glass p-8 rounded-2xl border border-white/10">
-        <h3 class="text-2xl font-bold mb-3">AI Automation</h3>
-        <p class="opacity-80">Custom AI systems, workflow automation, intelligent agents, and full business automation suites.</p>
+  <section id="services" class="py-32 px-6 bg-gray-950">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-20">
+        <h2 class="text-5xl font-bold mb-6 section-title">INTELLIGENCE AT SCALE</h2>
+        <p class="text-xl opacity-80 max-w-3xl mx-auto">End-to-end solutions that transform how businesses operate, compete, and win.</p>
       </div>
-      <div class="glass p-8 rounded-2xl border border-white/10">
-        <h3 class="text-2xl font-bold mb-3">Cybersecurity</h3>
-        <p class="opacity-80">Protection, audits, penetration testing, monitoring, and real‑time threat defense.</p>
-      </div>
-      <div class="glass p-8 rounded-2xl border border-white/10">
-        <h3 class="text-2xl font-bold mb-3">Tech Support</h3>
-        <p class="opacity-80">Hardware, software, systems diagnostics, setups, upgrades, and 24/7 technical support.</p>
-      </div>
-      <div class="glass p-8 rounded-2xl border border-white/10">
-        <h3 class="text-2xl font-bold mb-3">Cloud & DevOps</h3>
-        <p class="opacity-80">Cloud hosting, server management, CI/CD pipelines, and infrastructure scaling.</p>
-      </div>
-      <div class="glass p-8 rounded-2xl border border-white/10">
-        <h3 class="text-2xl font-bold mb-3">Software Engineering</h3>
-        <p class="opacity-80">Custom apps, internal tools, automation engines, dashboards, and enterprise software.</p>
-      </div>
-      <div class="glass p-8 rounded-2xl border border-white/10">
-        <h3 class="text-2xl font-bold mb-3">Business Consulting</h3>
-        <p class="opacity-80">Scaling strategies, digital transformation, automation mapping, and optimization services.</p>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Service Card -->
+        <div class="glass p-8 rounded-3xl group cursor-pointer">
+          <div class="w-16 h-16 bg-sky-500/20 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-sky-500 transition">
+            <i data-lucide="brain-circuit" class="w-8 h-8 text-sky-400"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-4">AI Automation</h3>
+          <p class="opacity-80 mb-6">Custom neural agents, predictive workflows, autonomous decision engines, and full-stack business automation.</p>
+          <a href="#contact" class="text-sky-400 font-bold flex items-center gap-2 hover:gap-3 transition-all">
+            Deploy Now <i data-lucide="arrow-right" class="w-5 h-5"></i>
+          </a>
+        </div>
+
+        <div class="glass p-8 rounded-3xl group cursor-pointer">
+          <div class="w-16 h-16 bg-red-500/20 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-red-500 transition">
+            <i data-lucide="shield-alert" class="w-8 h-8 text-red-400"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-4">Zero-Trust Security</h3>
+          <p class="opacity-80 mb-6">Real-time threat hunting, AI-driven anomaly detection, penetration testing, and compliance automation.</p>
+          <a href="#contact" class="text-red-400 font-bold flex items-center gap-2 hover:gap-3 transition-all">
+            Secure Now <i data-lucide="arrow-right" class="w-5 h-5"></i>
+          </a>
+        </div>
+
+        <div class="glass p-8 rounded-3xl group cursor-pointer">
+          <div class="w-16 h-16 bg-green-500/20 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-green-500 transition">
+            <i data-lucide="cpu" class="w-8 h-8 text-green-400"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-4">Tech & Hardware</h3>
+          <p class="opacity-80 mb-6">On-prem systems, edge computing, IoT fleets, diagnostics, upgrades, and 24/7 global support.</p>
+          <a href="#contact" class="text-green-400 font-bold flex items-center gap-2 hover:gap-3 transition-all">
+            Optimize Now <i data-lucide="arrow-right" class="w-5 h-5"></i>
+          </a>
+        </div>
+
+        <div class="glass p-8 rounded-3xl group cursor-pointer">
+          <div class="w-16 h-16 bg-purple-500/20 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-purple-500 transition">
+            <i data-lucide="cloud" class="w-8 h-8 text-purple-400"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-4">Cloud & DevOps</h3>
+          <p class="opacity-80 mb-6">Multi-cloud orchestration, CI/CD, auto-scaling, cost optimization, and disaster recovery.</p>
+          <a href="#contact" class="text-purple-400 font-bold flex items-center gap-2 hover:gap-3 transition-all">
+            Scale Now <i data-lucide="arrow-right" class="w-5 h-5"></i>
+          </a>
+        </div>
+
+        <div class="glass p-8 rounded-3xl group cursor-pointer">
+          <div class="w-16 h-16 bg-yellow-500/20 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-yellow-500 transition">
+            <i data-lucide="code-2" class="w-8 h-8 text-yellow-400"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-4">Software Engineering</h3>
+          <p class="opacity-80 mb-6">Full-stack apps, microservices, internal platforms, AI dashboards, and legacy modernization.</p>
+          <a href="#contact" class="text-yellow-400 font-bold flex items-center gap-2 hover:gap-3 transition-all">
+            Build Now <i data-lucide="arrow-right" class="w-5 h-5"></i>
+          </a>
+        </div>
+
+        <div class="glass p-8 rounded-3xl group cursor-pointer">
+          <div class="w-16 h-16 bg-pink-500/20 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-pink-500 transition">
+            <i data-lucide="trending-up" class="w-8 h-8 text-pink-400"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-4">Growth Consulting</h3>
+          <p class="opacity-80 mb-6">Digital transformation roadmaps, AI adoption strategy, ROI modeling, and change management.</p>
+          <a href="#contact" class="text-pink-400 font-bold flex items-center gap-2 hover:gap-3 transition-all">
+            Grow Now <i data-lucide="arrow-right" class="w-5 h-5"></i>
+          </a>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- STATS -->
-  <section class="py-20 px-6 bg-black">
-    <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-10 text-center">
-      <div>
-        <h3 class="text-5xl font-extrabold">99%</h3>
-        <p class="opacity-80">Client Satisfaction</p>
+  <section id="stats" class="py-32 px-6 bg-black">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-20">
+        <h2 class="text-5xl font-bold mb-6 section-title">PROVEN IMPACT</h2>
+        <p class="text-xl opacity-80">Real results from real clients. Numbers don’t lie.</p>
       </div>
-      <div>
-        <h3 class="text-5xl font-extrabold">24/7</h3>
-        <p class="opacity-80">Tech Support</p>
+      <div class="grid md:grid-cols-4 gap-10 text-center">
+        <div class="glass p-10 rounded-3xl">
+          <h3 class="text-6xl font-extrabold text-sky-400 mb-2">99.9%</h3>
+          <p class="text-lg opacity-80">System Uptime</p>
+        </div>
+        <div class="glass p-10 rounded-3xl">
+          <h3 class="text-6xl font-extrabold text-green-400 mb-2">24/7</h3>
+          <p class="text-lg opacity-80">Global Support</p>
+        </div>
+        <div class="glass p-10 rounded-3xl">
+          <h3 class="text-6xl font-extrabold text-yellow-400 mb-2">+150</h3>
+          <p class="text-lg opacity-80">Systems Automated</p>
+        </div>
+        <div class="glass p-10 rounded-3xl">
+          <h3 class="text-6xl font-extrabold text-purple-400 mb-2">68%</h3>
+          <p class="text-lg opacity-80">Avg Cost Reduction</p>
+        </div>
       </div>
-      <div>
-        <h3 class="text-5xl font-extrabold">+150</h3>
-        <p class="opacity-80">Systems Automated</p>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="py-32 px-6 bg-gray-950">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-5xl font-bold text-center mb-20 section-title">TRUSTED BY LEADERS</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="glass p-8 rounded-3xl italic">
+          <p class="mb-6 opacity-90">"VORTINEX cut our operational costs by 72% in 6 months with AI agents that never sleep."</p>
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 bg-gradient-to-br from-sky-400 to-blue-600 rounded-full"></div>
+            <div>
+              <p class="font-bold">Sarah Chen</p>
+              <p class="text-sm opacity-70">CTO, Nexus Finance</p>
+            </div>
+          </div>
+        </div>
+        <div class="glass p-8 rounded-3xl italic">
+          <p class="mb-6 opacity-90">"Their security team found vulnerabilities we didn’t know existed. Zero breaches since."</p>
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 bg-gradient-to-br from-red-400 to-pink-600 rounded-full"></div>
+            <div>
+              <p class="font-bold">Marcus Silva</p>
+              <p class="text-sm opacity-70">CISO, Helion Energy</p>
+            </div>
+          </div>
+        </div>
+        <div class="glass p-8 rounded-3xl italic">
+          <p class="mb-6 opacity-90">"Deployed a custom AI dashboard in 2 weeks. Now we predict demand with 97% accuracy."</p>
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 bg-gradient-to-br from-green-400 to-emerald-600 rounded-full"></div>
+            <div>
+              <p class="font-bold">Aisha Patel</p>
+              <p class="text-sm opacity-70">VP Ops, Quantum Logistics</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- CONTACT -->
-  <section id="contact" class="py-24 px-6 bg-gray-900">
+  <section id="contact" class="py-32 px-6 bg-gradient-to-b from-gray-950 to-black">
     <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-4xl font-bold mb-6 section-title">CONTACT VORTINEX</h2>
-      <p class="opacity-80 mb-10">Want automation? Need tech support? Want a custom AI built for your business? Hit us up.</p>
-
-      <form class="grid gap-6 max-w-2xl mx-auto text-black">
-        <input class="p-4 rounded-xl" type="text" placeholder="Your Name" />
-        <input class="p-4 rounded-xl" type="email" placeholder="Your Email" />
-        <textarea class="p-4 rounded-xl" rows="4" placeholder="Your Message"></textarea>
-        <button class="px-8 py-4 bg-white rounded-xl font-bold hover:bg-gray-300 transition">Send Message</button>
+      <h2 class="text-5xl font-bold mb-6 section-title">READY TO LEAD THE FUTURE?</h2>
+      <p class="text-xl opacity-80 mb-12 max-w-2xl mx-auto">Let’s build your intelligent enterprise. Schedule a free strategy session today.</p>
+      
+      <form class="glass p-10 rounded-3xl border border-white/10 max-w-2xl mx-auto" id="contact-form">
+        <div class="grid md:grid-cols-2 gap-6 mb-6">
+          <input class="p-4 rounded-xl bg-white/10 border border-white/20 placeholder-gray-400 focus:border-sky-400 focus:outline-none transition" type="text" placeholder="Full Name" required />
+          <input class="p-4 rounded-xl bg-white/10 border border-white/20 placeholder-gray-400 focus:border-sky-400 focus:outline-none transition" type="email" placeholder="Business Email" required />
+        </div>
+        <div class="grid md:grid-cols-2 gap-6 mb-6">
+          <input class="p-4 rounded-xl bg-white/10 border border-white/20 placeholder-gray-400 focus:border-sky-400 focus:outline-none transition" type="text" placeholder="Company" required />
+          <input class="p-4 rounded-xl bg-white/10 border border-white/20 placeholder-gray-400 focus:border-sky-400 focus:outline-none transition" type="tel" placeholder="Phone (Optional)" />
+        </div>
+        <textarea class="p-4 rounded-xl bg-white/10 border border-white/20 placeholder-gray-400 focus:border-sky-400 focus:outline-none transition w-full mb-6" rows="5" placeholder="Tell us about your goals, challenges, or vision..." required></textarea>
+        <button type="submit" class="w-full px-8 py-5 bg-gradient-to-r from-sky-500 to-blue-600 text-black font-bold rounded-xl hover:from-sky-400 hover:to-blue-500 transition transform hover:scale-105 glow flex items-center justify-center gap-3 text-lg">
+          <i data-lucide="send" class="w-6 h-6"></i>
+          Launch My Transformation
+        </button>
       </form>
+
+      <div class="mt-12 flex flex-col sm:flex-row items-center justify-center gap-8 text-sm opacity-70">
+        <div class="flex items-center gap-2">
+          <i data-lucide="mail" class="w-5 h-5"></i>
+          <span>hello@vortinex.ai</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <i data-lucide="phone" class="w-5 h-5"></i>
+          <span>+1 (855) VORTINEX</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <i data-lucide="map-pin" class="w-5 h-5"></i>
+          <span>San Francisco • London • Singapore</span>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer class="py-10 text-center bg-black text-gray-500">
-    <p>© 2025 VORTINEX — All Rights Reserved.</p>
+  <footer class="py-16 px-6 bg-black border-t border-white/10">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid md:grid-cols-4 gap-10 mb-12">
+        <div>
+          <h3 class="text-2xl font-bold bg-gradient-to-r from-sky-400 to-blue-600 bg-clip-text text-transparent mb-4">VORTINEX</h3>
+          <p class="text-sm opacity-70">Engineering the future of intelligent enterprise.</p>
+        </div>
+        <div>
+          <h4 class="font-bold mb-4">Solutions</h4>
+          <ul class="space-y-2 text-sm opacity-70">
+            <li><a href="#" class="hover:text-sky-400 transition">AI Automation</a></li>
+            <li><a href="#" class="hover:text-sky-400 transition">Cybersecurity</a></li>
+            <li><a href="#" class="hover:text-sky-400 transition">Cloud Infra</a></li>
+            <li><a href="#" class="hover:text-sky-400 transition">Consulting</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold mb-4">Company</h4>
+          <ul class="space-y-2 text-sm opacity-70">
+            <li><a href="#" class="hover:text-sky-400 transition">About</a></li>
+            <li><a href="#" class="hover:text-sky-400 transition">Careers</a></li>
+            <li><a href="#" class="hover:text-sky-400 transition">Blog</a></li>
+            <li><a href="#" class="hover:text-sky-400 transition">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold mb-4">Legal</h4>
+          <ul class="space-y-2 text-sm opacity-70">
+            <li><a href="#" class="hover:text-sky-400 transition">Privacy</a></li>
+            <li><a href="#" class="hover:text-sky-400 transition">Terms</a></li>
+            <li><a href="#" class="hover:text-sky-400 transition">Security</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-sm opacity-60">
+        <p>© 2025 VORTINEX. All Rights Reserved.</p>
+        <div class="flex gap-6 mt-4 md:mt-0">
+          <a href="#" class="hover:text-sky-400 transition"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+          <a href="#" class="hover:text-sky-400 transition"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+          <a href="#" class="hover:text-sky-400 transition"><i data-lucide="github" class="w-5 h-5"></i></a>
+        </div>
+      </div>
+    </div>
   </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Mobile Menu
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const closeMenu = document.getElementById('close-menu');
+
+    mobileBtn.addEventListener('click', () => mobileMenu.classList.remove('hidden'));
+    closeMenu.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+    mobileMenu.addEventListener('click', (e) => {
+      if (e.target === mobileMenu) mobileMenu.classList.add('hidden');
+    });
+
+    // Floating Particles
+    const particlesContainer = document.getElementById('particles');
+    function createParticle() {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      particle.style.left = Math.random() * 100 + 'vw';
+      particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+      particle.style.animationDelay = Math.random() * 5 + 's';
+      particlesContainer.appendChild(particle);
+      setTimeout(() => particle.remove(), 20000);
+    }
+    setInterval(createParticle, 300);
+
+    // Form Submission
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('🚀 Thank you! Your message has been sent. We’ll contact you within 24 hours.');
+      this.reset();
+    });
+
+    // Smooth Scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        target.scrollIntoView({ behavior: 'smooth' });
+        if (mobileMenu.classList.contains('hidden') === false) {
+          mobileMenu.classList.add('hidden');
+        }
+      });
+    });
+  </script>
 </body>
 </html>
